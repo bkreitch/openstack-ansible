@@ -1,3 +1,7 @@
+- name: os_manila
+  scm: git
+  src: https://github.com/bkreitch/openstack-ansible-os_manila
+  version: master
 - name: apt_package_pinning
   scm: git
   src: https://git.openstack.org/openstack/openstack-ansible-apt_package_pinning
@@ -94,6 +98,10 @@
   scm: git
   src: https://git.openstack.org/openstack/openstack-ansible-os_tempest
   version: 0232d0377e95d1aa815a9f6df80cf9c8d49f1ecb
+#- name: os_manila
+#  scm: git
+#  src: https://github.com/bkreitch/openstack-ansible-os_manila
+#  version: master
 - name: plugins
   path: /etc/ansible
   scm: git

@@ -125,6 +125,7 @@
       - python-openstackclient
       - python-ceilometerclient
       - python-cinderclient
+      - python-manilaclient
       - python-glanceclient
       - python-heatclient
       - python-keystoneclient

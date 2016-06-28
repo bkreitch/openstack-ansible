@@ -109,6 +109,7 @@ pushd "playbooks"
     install_bits os-keystone-install.yml
     install_bits os-glance-install.yml
     install_bits os-cinder-install.yml
+    install_bits os-manila-install.yml
     install_bits os-nova-install.yml
     install_bits os-neutron-install.yml
     install_bits os-heat-install.yml

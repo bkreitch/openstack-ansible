@@ -67,6 +67,7 @@ global_overrides:
           - glance_api
           - cinder_api
           - cinder_volume
+          - manila_api
           - nova_compute
           - swift_proxy
 

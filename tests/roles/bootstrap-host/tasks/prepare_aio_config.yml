@@ -38,6 +38,8 @@
       override: "{{ ceilometer_env_overrides | default({}) }}"
     - name: cinder.yml
       override: "{{ cinder_env_overrides | default({}) }}"
+    - name: manila.yml
+      override: "{{ manila_env_overrides | default({}) }}"
     - name: galera.yml
       override: "{{ galera_env_overrides | default({}) }}"
     - name: glance.yml
