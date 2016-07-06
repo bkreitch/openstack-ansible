@@ -82,19 +82,19 @@
     #   retries: 3
     #   tags:
     #     - ssh-wait
-    # - name: Sort the rabbitmq servers
-    #   dist_sort:
-    #     value_to_lookup: "{{ container_name }}"
-    #     ref_list: "{{ groups['manila_all'] }}"
-    #     src_list: "{{ rabbitmq_servers }}"
-    #   register: servers
-    #   tags:
-    #     - always
-    # - name: Set rabbitmq servers
-    #   set_fact:
-    #     rabbitmq_servers: "{{ servers.sorted_list }}"
-    #   tags:
-    #     - always
+    - name: Sort the rabbitmq servers
+      dist_sort:
+        value_to_lookup: "{{ container_name }}"
+        ref_list: "{{ groups['manila_all'] }}"
+        src_list: "{{ rabbitmq_servers }}"
+      register: servers
+      tags:
+        - always
+    - name: Set rabbitmq servers
+      set_fact:
+        rabbitmq_servers: "{{ servers.sorted_list }}"
+      tags:
+        - always
     # - name: Create log dir
     #   file:
     #     path: "{{ item.path }}"
@@ -116,33 +116,33 @@
     #   when: is_metal | bool
     #   tags:
     #     - manila-logs
-    # - name: Ensure Rabbitmq vhost
-    #   rabbitmq_vhost:
-    #     name: "{{ manila_rabbitmq_vhost }}"
-    #     state: "present"
-    #   delegate_to: "{{ groups['rabbitmq_all'][0] }}"
-    #   when:
-    #     - inventory_hostname == groups['manila_all'][0]
-    #     - groups['rabbitmq_all']|length > 0
-    #   tags:
-    #     - manila-rabbitmq
-    #     - manila-rabbitmq-vhost
-    # - name: Ensure rabbitmq user
-    #   rabbitmq_user:
-    #     user: "{{ manila_rabbitmq_userid }}"
-    #     password: "{{ manila_rabbitmq_password }}"
-    #     vhost: "{{ manila_rabbitmq_vhost }}"
-    #     configure_priv: ".*"
-    #     read_priv: ".*"
-    #     write_priv: ".*"
-    #     state: "present"
-    #   delegate_to: "{{ groups['rabbitmq_all'][0] }}"
-    #   when:
-    #     - inventory_hostname == groups['manila_all'][0]
-    #     - groups['rabbitmq_all']|length > 0
-    #   tags:
-    #     - manila-rabbitmq
-    #     - manila-rabbitmq-user
+    - name: Ensure Rabbitmq vhost
+      rabbitmq_vhost:
+        name: "{{ manila_rabbitmq_vhost }}"
+        state: "present"
+      delegate_to: "{{ groups['rabbitmq_all'][0] }}"
+      when:
+        - inventory_hostname == groups['manila_all'][0]
+        - groups['rabbitmq_all']|length > 0
+      tags:
+        - manila-rabbitmq
+        - manila-rabbitmq-vhost
+    - name: Ensure rabbitmq user
+      rabbitmq_user:
+        user: "{{ manila_rabbitmq_userid }}"
+        password: "{{ manila_rabbitmq_password }}"
+        vhost: "{{ manila_rabbitmq_vhost }}"
+        configure_priv: ".*"
+        read_priv: ".*"
+        write_priv: ".*"
+        state: "present"
+      delegate_to: "{{ groups['rabbitmq_all'][0] }}"
+      when:
+        - inventory_hostname == groups['manila_all'][0]
+        - groups['rabbitmq_all']|length > 0
+      tags:
+        - manila-rabbitmq
+        - manila-rabbitmq-user
     # - name: Set manila storage bridge (is_metal)
     #   set_fact:
     #     storage_bridge: "{{ 'ansible_' + hostvars[inventory_hostname]['container_networks']['storage_address']['bridge'] | replace('-', '_') }}"
@@ -211,8 +211,8 @@
   vars:
     galera_address: "{{ internal_lb_vip_address }}"
     is_metal: "{{ properties.is_metal|default(false) }}"
-    # manila_rabbitmq_userid: manila
-    # manila_rabbitmq_vhost: /manila
-    # manila_rabbitmq_servers: "{{ rabbitmq_servers }}"
-    # manila_rabbitmq_port: "{{ rabbitmq_port }}"
-    # manila_rabbitmq_use_ssl: "{{ rabbitmq_use_ssl }}"
+    manila_rabbitmq_userid: manila
+    manila_rabbitmq_vhost: /manila
+    manila_rabbitmq_servers: "{{ rabbitmq_servers }}"
+    manila_rabbitmq_port: "{{ rabbitmq_port }}"
+    manila_rabbitmq_use_ssl: "{{ rabbitmq_use_ssl }}"
