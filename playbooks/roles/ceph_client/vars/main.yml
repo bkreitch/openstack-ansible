@@ -48,4 +48,12 @@ ceph_components:
     client:
       - '{{ nova_ceph_client }}'
     service: '{{ ceph_nova_service_names }}'
+  - component: manila_share
+    package:
+      - ceph # TODO: remove this once http://tracker.ceph.com/issues/11388 is resolved
+      - ceph-common
+      - python-ceph
+    client:
+      - '{{ manila_ceph_client }}'
+    service: '{{ ceph_manila_service_names }}'
 

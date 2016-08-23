@@ -24,6 +24,9 @@
         (inventory_hostname in groups['nova_compute']
         and (cinder_backends_rbd_inuse|bool or
         nova_libvirt_images_rbd_pool is defined))
+        or
+        (inventory_hostname in groups['manila_share']
+        and manila_backend_rbd_inuse|bool)
   tags:
   - ceph-client
 

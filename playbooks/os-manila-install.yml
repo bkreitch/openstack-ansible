@@ -193,21 +193,21 @@
       manila_glance_service_port: "{{ glance_service_port }}"
       tags:
         - "os-manila"
-    # - role: "ceph_client"
-    #   openstack_service_system_user: "{{ manila_system_user_name }}"
-    #   tags:
-    #     - "manila-ceph-client"
-    #     - "ceph-client"
-    # - role: "rsyslog_client"
-    #   rsyslog_client_log_rotate_file: manila_log_rotate
-    #   rsyslog_client_log_dir: "/var/log/manila"
-    #   rsyslog_client_config_name: "99-manila-rsyslog-client.conf"
-    #   tags:
-    #     - "manila-rsyslog-client"
-    #     - "rsyslog-client"
-    # - role: "system_crontab_coordination"
-    #   tags:
-    #     - "system-crontab-coordination"
+    - role: "ceph_client"
+      openstack_service_system_user: "{{ manila_system_user_name }}"
+      tags:
+        - "manila-ceph-client"
+        - "ceph-client"
+    - role: "rsyslog_client"
+      rsyslog_client_log_rotate_file: manila_log_rotate
+      rsyslog_client_log_dir: "/var/log/manila"
+      rsyslog_client_config_name: "99-manila-rsyslog-client.conf"
+      tags:
+        - "manila-rsyslog-client"
+        - "rsyslog-client"
+    - role: "system_crontab_coordination"
+      tags:
+        - "system-crontab-coordination"
   vars:
     galera_address: "{{ internal_lb_vip_address }}"
     is_metal: "{{ properties.is_metal|default(false) }}"

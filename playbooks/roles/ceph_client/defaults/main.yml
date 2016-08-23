@@ -71,6 +71,7 @@ ceph_mons: []
 glance_ceph_client: glance
 cinder_ceph_client: cinder
 cinder_backup_ceph_client: cinder-backup
+manila_ceph_client: manila
 # by default we assume you use rbd for both cinder and nova, and as libvirt
 # needs to access both volumes (cinder) as boot disks (nova) we default to
 # reuse the cinder_ceph_client
@@ -87,3 +88,5 @@ ceph_nova_service_names:
   - nova-compute
 ceph_glance_service_names:
   - glance-api
+ceph_manila_service_names:
+  - manila-share
